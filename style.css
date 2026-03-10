@@ -8,7 +8,7 @@
 }
 
 body {
-    margin: 0; font-family: sans-serif;
+    margin: 0; font-family: 'Segoe UI', sans-serif;
     background-color: var(--bg-color); color: var(--text-primary);
     display: flex; justify-content: center; align-items: center; height: 100vh;
 }
@@ -20,36 +20,41 @@ body {
 }
 
 .logo { font-size: 40px; margin-bottom: 10px; }
-h1 { font-size: 28px; margin-bottom: 30px; }
+h1 { font-size: 28px; margin-bottom: 30px; letter-spacing: -1px; }
 
 .input-group { text-align: left; margin-bottom: 15px; }
-.input-group label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; }
+.input-group label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 14px; }
 
 input {
-    width: 100%; padding: 12px; background: #121212;
+    width: 100%; padding: 14px; background: #121212;
     border: 1px solid var(--border-color); border-radius: 4px; color: white;
-    box-sizing: border-box;
+    box-sizing: border-box; outline: none;
 }
+
+input:focus { border-color: var(--accent-color); }
 
 .btn-continue {
     width: 100%; padding: 14px; border-radius: 25px; border: none;
-    background-color: var(--accent-color); font-weight: bold;
-    cursor: not-allowed; opacity: 0.5; margin-bottom: 20px;
+    background-color: var(--accent-color); font-weight: bold; font-size: 16px;
+    cursor: pointer; margin-bottom: 20px; transition: transform 0.1s;
 }
+
+.btn-continue:hover { transform: scale(1.02); background-color: #1fdf64; }
 
 .divider { margin: 20px 0; display: flex; align-items: center; color: var(--text-secondary); }
 .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--border-color); }
-.divider span { padding: 0 10px; font-size: 12px; }
+.divider span { padding: 0 10px; font-size: 12px; font-weight: bold; text-transform: uppercase; }
 
 .btn-social {
     width: 100%; padding: 12px; border-radius: 25px;
     border: 1px solid var(--text-secondary); background: transparent;
     color: white; font-weight: bold; display: flex; align-items: center;
-    justify-content: center; gap: 10px; cursor: pointer;
+    justify-content: center; gap: 10px; cursor: pointer; margin-bottom: 10px;
 }
 
-.btn-social:hover { border-color: white; background: #1ed7601a; }
+.btn-social:hover { border-color: white; background: #ffffff10; }
 .btn-social img { width: 18px; }
+
 hr { border: 0; border-top: 1px solid var(--border-color); margin: 30px 0; }
 .footer-text { color: var(--text-secondary); font-size: 14px; }
-.footer-text a { color: white; text-decoration: none; font-weight: bold; }
+.footer-text a { color: white; text-decoration: underline; font-weight: bold; }

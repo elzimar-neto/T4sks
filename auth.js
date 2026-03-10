@@ -9,7 +9,6 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
 import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
 
-// 1. Sua Configuração
 const firebaseConfig = {
     apiKey: "AIzaSyCOHWpGPcdUEXuPopdZd16qQTDHKd-R994",
     authDomain: "t4sks-af64e.firebaseapp.com",
@@ -19,22 +18,23 @@ const firebaseConfig = {
     appId: "1:1069050787483:web:04ac9c6780764ec14ef83e"
 };
 
-// 2. Inicialização
+// Inicialização
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const provider = new GoogleAuthProvider();
 
-// Elementos da Interface
+// Elementos
 const btnGoogle = document.getElementById('btn-google');
-const btnContinue = document.querySelector('.btn-continue');
-const emailInput = document.querySelector('input[type="text"]');
+const btnContinue = document.getElementById('btn-continue');
+const emailInput = document.getElementById('email-field');
+const linkRegistrar = document.getElementById('link-registrar');
 
-// --- LÓGICA 1: LOGIN COM GOOGLE ---
+// 1. Login com Google
 btnGoogle.addEventListener('click', async () => {
     try {
         const result = await signInWithPopup(auth, provider);
-        await salvarUsuarioNoBanco(result.user);
+        await registrarUsuarioNoFirestore(result.user);
         window.location.href = "dashboard.html";
     } catch (error) {
         console.error("Erro Google:", error);
@@ -42,61 +42,54 @@ btnGoogle.addEventListener('click', async () => {
     }
 });
 
-// --- LÓGICA 2: LOGIN COM E-MAIL E SENHA ---
-// Habilitar o botão continuar se houver texto
-emailInput.disabled = false;
-emailInput.addEventListener('input', () => {
-    const isValid = emailInput.value.length > 5 && emailInput.value.includes('@');
-    btnContinue.disabled = !isValid;
-    btnContinue.style.opacity = isValid ? "1" : "0.5";
-    btnContinue.style.cursor = isValid ? "pointer" : "not-allowed";
-});
-
+// 2. Login/Inscrição com E-mail
 btnContinue.addEventListener('click', async () => {
     const email = emailInput.value;
-    const password = prompt("Digite sua senha para o T4SKS:");
+    if (!email || email.length < 5) {
+        alert("Por favor, digite um e-mail válido.");
+        return;
+    }
 
+    const password = prompt("Digite sua senha:");
     if (!password) return;
 
     try {
-        // Tenta fazer login
         const result = await signInWithEmailAndPassword(auth, email, password);
-        await salvarUsuarioNoBanco(result.user);
+        await registrarUsuarioNoFirestore(result.user);
         window.location.href = "dashboard.html";
     } catch (error) {
-        // Se o usuário não existir, oferece para criar conta
         if (error.code === 'auth/user-not-found' || error.code === 'auth/invalid-credential') {
-            const novoUsuario = confirm("Usuário não encontrado. Deseja criar uma nova conta com este e-mail?");
-            if (novoUsuario) {
-                try {
-                    const result = await createUserWithEmailAndPassword(auth, email, password);
-                    await salvarUsuarioNoBanco(result.user);
-                    window.location.href = "dashboard.html";
-                } catch (e) {
-                    alert("Erro ao criar conta: " + e.message);
-                }
+            const signup = confirm("Usuário não encontrado. Deseja criar uma conta agora?");
+            if (signup) {
+                const res = await createUserWithEmailAndPassword(auth, email, password);
+                await registrarUsuarioNoFirestore(res.user);
+                window.location.href = "dashboard.html";
             }
         } else {
-            alert("Erro no login: " + error.message);
+            alert("Erro: " + error.message);
         }
     }
 });
 
-// --- FUNÇÃO AUXILIAR: SALVAR NO BANCO ---
-async function salvarUsuarioNoBanco(user) {
+// 3. Link de Inscrição (simula o clique no Google para facilitar)
+linkRegistrar.addEventListener('click', (e) => {
+    e.preventDefault();
+    btnGoogle.click();
+});
+
+// Função para salvar no Firestore
+async function registrarUsuarioNoFirestore(user) {
     await setDoc(doc(db, "users", user.uid), {
-        uid: user.uid,
         nome: user.displayName || emailInput.value.split('@')[0],
         email: user.email,
-        foto: user.photoURL || "https://ui-avatars.com/api/?name=" + user.email,
-        lastLogin: new Date()
+        foto: user.photoURL || `https://ui-avatars.com/api/?name=${user.email}`,
+        updatedAt: new Date()
     }, { merge: true });
 }
 
-// --- MONITOR DE SESSÃO ---
+// Observador de Sessão
 onAuthStateChanged(auth, (user) => {
-    if (user) {
-        const isIndex = window.location.pathname.includes('index.html') || window.location.pathname === '/';
-        if (isIndex) window.location.href = "dashboard.html";
+    if (user && (window.location.pathname.includes('index.html') || window.location.pathname === '/')) {
+        window.location.href = "dashboard.html";
     }
 });
