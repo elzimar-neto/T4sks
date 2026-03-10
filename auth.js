@@ -21,20 +21,19 @@ if (btnGoogle) {
     btnGoogle.onclick = async () => {
         try {
             const result = await signInWithPopup(auth, provider);
-            const user = result.user;
-            await setDoc(doc(db, "users", user.email), {
-                uid: user.uid,
-                nome: user.displayName,
-                email: user.email,
-                foto: user.photoURL,
+            await setDoc(doc(db, "users", result.user.email), {
+                uid: result.user.uid,
+                nome: result.user.displayName,
+                email: result.user.email,
+                foto: result.user.photoURL,
                 lastLogin: serverTimestamp()
             }, { merge: true });
-        } catch (error) { console.error("Erro no login:", error); }
+        } catch (e) { console.error(e); }
     };
 }
 
 onAuthStateChanged(auth, (user) => {
-    const isLoginPath = window.location.pathname.endsWith('index.html') || window.location.pathname === '/';
-    if (user && isLoginPath) window.location.href = "dashboard.html";
-    if (!user && !isLoginPath) window.location.href = "index.html";
+    const isLogin = window.location.pathname.endsWith('index.html') || window.location.pathname === '/';
+    if (user && isLogin) window.location.href = "dashboard.html";
+    if (!user && !isLogin) window.location.href = "index.html";
 });

@@ -13,19 +13,17 @@
             <div class="sidebar-top">
                 <div class="logo-area">🤖 DASHT4SK</div>
                 <nav class="projects-nav">
-                    <h3>PROJETOS <button id="btn-new-project" title="Novo Projeto">+</button></h3>
+                    <h3>PROJETOS <button id="btn-new-project">+</button></h3>
                     <ul id="projects-list"></ul>
                 </nav>
             </div>
             
             <div class="sidebar-bottom">
-                <div class="theme-switch">
-                    <button id="toggle-theme"><i class="fa-solid fa-moon"></i> Tema</button>
-                </div>
+                <button id="toggle-theme"><i class="fa-solid fa-moon"></i> Tema</button>
                 <div class="user-footer">
                     <img id="user-photo" src="" alt="">
                     <span id="user-name">...</span>
-                    <button id="btn-logout" title="Sair"><i class="fa-solid fa-right-from-bracket"></i></button>
+                    <button id="btn-logout"><i class="fa-solid fa-right-from-bracket"></i></button>
                 </div>
             </div>
         </aside>
@@ -34,7 +32,7 @@
             <header class="top-bar">
                 <div class="project-header">
                     <h2 id="current-project-title">Geral</h2>
-                    <div id="project-admin-tools" style="display:none; gap:10px; margin-left:15px;">
+                    <div id="project-admin-tools" style="display:none; gap:10px;">
                         <button id="btn-edit-project" class="btn-icon"><i class="fa-solid fa-pen"></i></button>
                         <button id="btn-delete-project" class="btn-icon"><i class="fa-solid fa-trash"></i></button>
                         <button id="btn-invite" class="btn-secondary">Convidar</button>
@@ -42,7 +40,7 @@
                 </div>
                 <div class="search-box">
                     <i class="fa fa-search"></i>
-                    <input type="text" id="search-input" placeholder="Buscar tarefas...">
+                    <input type="text" id="search-input" placeholder="Buscar...">
                 </div>
             </header>
 
@@ -64,31 +62,29 @@
                     <button id="btn-archive-done" class="btn-archive">Limpar Concluídas</button>
                 </div>
             </div>
-            <footer class="main-footer">
-                Developed by Elzimar José de Carvalho Neto. © Copyright 2026, All Rights Reserved.
-            </footer>
+            <footer class="main-footer">Developed by Elzimar José de Carvalho Neto. © Copyright 2026</footer>
         </main>
     </div>
 
     <div id="task-modal" class="modal">
         <div class="modal-content">
             <h2>Nova Tarefa</h2>
-            <input type="text" id="task-title" placeholder="Título da tarefa">
+            <input type="text" id="task-title" placeholder="Título">
             <textarea id="task-desc" placeholder="Descrição"></textarea>
             
-            <div class="modal-row">
-                <div class="input-field">
-                    <label>Data de Entrega</label>
+            <div class="modal-grid">
+                <div class="field">
+                    <label>Data</label>
                     <input type="date" id="task-date">
                 </div>
-                <div class="input-field">
+                <div class="field">
                     <label>Prioridade</label>
                     <div class="star-rating" id="star-input">
-                        <i class="fa-star fa-regular" data-value="1"></i>
-                        <i class="fa-star fa-regular" data-value="2"></i>
-                        <i class="fa-star fa-regular" data-value="3"></i>
-                        <i class="fa-star fa-regular" data-value="4"></i>
-                        <i class="fa-star fa-regular" data-value="5"></i>
+                        <i class="fa-star fa-regular" data-v="1"></i>
+                        <i class="fa-star fa-regular" data-v="2"></i>
+                        <i class="fa-star fa-regular" data-v="3"></i>
+                        <i class="fa-star fa-regular" data-v="4"></i>
+                        <i class="fa-star fa-regular" data-v="5"></i>
                     </div>
                 </div>
             </div>
@@ -99,7 +95,6 @@
             </div>
         </div>
     </div>
-
     <script type="module" src="dashboard.js"></script>
 </body>
 </html>
