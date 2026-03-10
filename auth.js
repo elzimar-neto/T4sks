@@ -16,24 +16,42 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const provider = new GoogleAuthProvider();
 
+// Lógica do Clique
 const btnGoogle = document.getElementById('btn-google');
 if (btnGoogle) {
     btnGoogle.onclick = async () => {
         try {
             const result = await signInWithPopup(auth, provider);
-            await setDoc(doc(db, "users", result.user.email), {
-                uid: result.user.uid,
-                nome: result.user.displayName,
-                email: result.user.email,
-                foto: result.user.photoURL,
+            const user = result.user;
+
+            // Salva no banco e força o redirecionamento manual após salvar
+            await setDoc(doc(db, "users", user.email), {
+                uid: user.uid,
+                nome: user.displayName,
+                email: user.email,
+                foto: user.photoURL,
                 lastLogin: serverTimestamp()
             }, { merge: true });
-        } catch (e) { console.error(e); }
+
+            console.log("Login realizado!");
+            window.location.href = "dashboard.html"; // Redirecionamento forçado manual
+
+        } catch (error) {
+            console.error("Erro no Auth:", error);
+            alert("Erro ao entrar. Verifique se os domínios estão autorizados no Firebase.");
+        }
     };
 }
 
+// Monitor de estado (Caso o usuário já esteja logado ao abrir o site)
 onAuthStateChanged(auth, (user) => {
-    const isLogin = window.location.pathname.endsWith('index.html') || window.location.pathname === '/';
-    if (user && isLogin) window.location.href = "dashboard.html";
-    if (!user && !isLogin) window.location.href = "index.html";
+    const path = window.location.pathname;
+    const isLoginPage = path.endsWith('index.html') || path.endsWith('/') || path === '';
+
+    if (user && isLoginPage) {
+        window.location.assign("dashboard.html");
+    }
+    if (!user && path.includes('dashboard.html')) {
+        window.location.assign("index.html");
+    }
 });
