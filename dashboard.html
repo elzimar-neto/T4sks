@@ -15,14 +15,14 @@
             <nav class="projects-nav">
                 <h3>Meus Projetos</h3>
                 <ul id="projects-list">
-                    <li class="active" data-project="Geral">Geral</li>
+                    <li class="active" onclick="selecionarProjeto('Geral')">Geral</li>
                 </ul>
                 <button id="btn-new-project">+ Novo Projeto</button>
             </nav>
             <div class="user-footer">
-                <img id="user-photo" src="" alt="User">
+                <img id="user-photo" src="" alt="">
                 <span id="user-name">...</span>
-                <button id="btn-logout" title="Sair"><i class="fa-solid fa-right-from-bracket"></i></button>
+                <button id="btn-logout"><i class="fa-solid fa-right-from-bracket"></i></button>
             </div>
         </aside>
 
@@ -30,7 +30,7 @@
             <header class="top-bar">
                 <div class="search-box">
                     <i class="fa fa-search"></i>
-                    <input type="text" id="search-input" placeholder="Buscar em tarefas...">
+                    <input type="text" id="search-input" placeholder="Buscar tarefas...">
                 </div>
                 <div class="actions">
                     <button id="btn-invite" class="btn-secondary">Convidar</button>
@@ -61,8 +61,8 @@
     <div id="task-modal" class="modal">
         <div class="modal-content">
             <h2>Nova Tarefa</h2>
-            <input type="text" id="task-title" placeholder="O que precisa ser feito?">
-            <textarea id="task-desc" placeholder="Descrição ou detalhes adicionais" rows="4"></textarea>
+            <input type="text" id="task-title" placeholder="Título">
+            <textarea id="task-desc" placeholder="Descrição"></textarea>
             <div class="modal-buttons">
                 <button id="cancel-task">Cancelar</button>
                 <button id="save-task" class="btn-primary">Salvar Tarefa</button>
