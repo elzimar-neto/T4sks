@@ -15,14 +15,14 @@
             <nav class="projects-nav">
                 <h3>Meus Projetos</h3>
                 <ul id="projects-list">
-                    <li class="active">Geral</li>
+                    <li class="active" data-project="Geral">Geral</li>
                 </ul>
                 <button id="btn-new-project">+ Novo Projeto</button>
             </nav>
             <div class="user-footer">
-                <img id="user-photo" src="" alt="">
+                <img id="user-photo" src="" alt="User">
                 <span id="user-name">Carregando...</span>
-                <button id="btn-logout"><i class="fa-solid fa-right-from-bracket"></i></button>
+                <button id="btn-logout" title="Sair"><i class="fa-solid fa-right-from-bracket"></i></button>
             </div>
         </aside>
 
@@ -30,29 +30,29 @@
             <header class="top-bar">
                 <div class="search-box">
                     <i class="fa fa-search"></i>
-                    <input type="text" id="search-input" placeholder="Buscar tarefas...">
+                    <input type="text" id="search-input" placeholder="Buscar em tarefas...">
                 </div>
                 <div class="actions">
-                    <button id="btn-invite" class="btn-secondary">Convidar Membros</button>
+                    <button id="btn-invite" class="btn-secondary">Convidar</button>
                     <button id="btn-add-task" class="btn-primary">+ Nova Tarefa</button>
                 </div>
             </header>
 
             <div class="kanban-board">
-                <div class="kanban-column" id="todo-column">
-                    <h3>A Fazer <span class="count">0</span></h3>
-                    <div class="task-list" id="todo-list"></div>
+                <div class="kanban-column">
+                    <h3>A Fazer <span class="count" id="count-todo">0</span></h3>
+                    <div class="task-list" id="todo" ondragover="event.preventDefault()" ondrop="drop(event)"></div>
                 </div>
 
-                <div class="kanban-column" id="doing-column">
-                    <h3>Fazendo <span class="count">0</span></h3>
-                    <div class="task-list" id="doing-list"></div>
+                <div class="kanban-column">
+                    <h3>Fazendo <span class="count" id="count-doing">0</span></h3>
+                    <div class="task-list" id="doing" ondragover="event.preventDefault()" ondrop="drop(event)"></div>
                 </div>
 
-                <div class="kanban-column" id="done-column">
-                    <h3>Feito <span class="count">0</span></h3>
-                    <div class="task-list" id="done-list"></div>
-                    <button id="btn-archive-done">Arquivar Concluídas</button>
+                <div class="kanban-column">
+                    <h3>Feito <span class="count" id="count-done">0</span></h3>
+                    <div class="task-list" id="done" ondragover="event.preventDefault()" ondrop="drop(event)"></div>
+                    <button id="btn-archive-done" class="btn-archive">Arquivar Tudo</button>
                 </div>
             </div>
         </main>
@@ -61,11 +61,11 @@
     <div id="task-modal" class="modal">
         <div class="modal-content">
             <h2>Nova Tarefa</h2>
-            <input type="text" id="task-title" placeholder="O que precisa ser feito?">
-            <textarea id="task-desc" placeholder="Descrição (opcional)"></textarea>
+            <input type="text" id="task-title" placeholder="Título da tarefa">
+            <textarea id="task-desc" placeholder="Detalhes (opcional)"></textarea>
             <div class="modal-buttons">
                 <button id="cancel-task">Cancelar</button>
-                <button id="save-task" class="btn-primary">Criar Tarefa</button>
+                <button id="save-task" class="btn-primary">Salvar</button>
             </div>
         </div>
     </div>
