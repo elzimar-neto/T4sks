@@ -3,24 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - T4SKS</title>
-    <style>
-        :root { --bg: #121212; --card: #000000; --accent: #1ed760; --text: #ffffff; --border: #292929; }
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); display: flex; align-items: center; justify-content: center; height: 100vh; }
-        .login-card { background: var(--card); padding: 40px; border-radius: 12px; text-align: center; border: 1px solid var(--border); width: 350px; }
-        h1 { font-size: 32px; margin-bottom: 30px; }
-        .btn-google { width: 100%; padding: 14px; border-radius: 25px; border: 1px solid #a7a7a7; background: transparent; color: white; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; }
-        .btn-google:hover { border-color: white; background: #ffffff10; }
-        .btn-google img { width: 20px; }
-    </style>
+    <title>Login - DASHT4SK V1.0</title>
+    <link rel="stylesheet" href="dashboard-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
+<body class="auth-page dark-theme">
     <div class="login-card">
-        <h1>🚀 T4SKS</h1>
-        <button id="btn-google" class="btn-google">
-            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
-            Continuar com o Google
-        </button>
+        <header>
+            <div class="logo">🤖</div>
+            <h1>DASHT4SK <small>V1.0</small></h1>
+            <p>Gerencie seus fluxos de trabalho com inteligência.</p>
+        </header>
+
+        <div class="social-login">
+            <button id="btn-google" class="btn-social">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+                Continuar com o Google
+            </button>
+        </div>
+
+        <footer class="auth-footer">
+            <p>Developed by Elzimar José de Carvalho Neto.<br>© Copyright 2026, All Rights Reserved.</p>
+        </footer>
     </div>
     <script type="module" src="auth.js"></script>
 </body>

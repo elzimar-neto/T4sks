@@ -3,67 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - T4SKS</title>
+    <title>Dashboard - DASHT4SK</title>
     <link rel="stylesheet" href="dashboard-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
+<body class="dark-theme">
     <div class="app-container">
         <aside class="sidebar">
-            <div class="logo-area">🚀 T4SKS</div>
+            <div class="logo-area">🤖 DASHT4SK</div>
             <nav class="projects-nav">
-                <h3>Meus Projetos</h3>
-                <ul id="projects-list"><li class="active">Geral</li></ul>
-                <button id="btn-new-project">+ Novo Projeto</button>
+                <h3>PROJETOS <button id="btn-new-project" title="Novo Projeto">+</button></h3>
+                <ul id="projects-list"></ul>
             </nav>
+            <div class="theme-switch">
+                <button id="toggle-theme"><i class="fa-solid fa-moon"></i> Alternar Tema</button>
+            </div>
             <div class="user-footer">
                 <img id="user-photo" src="" alt="">
-                <span id="user-name">...</span>
-                <button id="btn-logout"><i class="fa-solid fa-right-from-bracket"></i></button>
+                <div class="u-info">
+                    <span id="user-name">...</span>
+                </div>
+                <button id="btn-logout" title="Sair"><i class="fa-solid fa-right-from-bracket"></i></button>
             </div>
         </aside>
 
         <main class="main-content">
             <header class="top-bar">
+                <div class="project-header">
+                    <h2 id="current-project-title">Geral</h2>
+                    <div id="project-admin-tools" style="display:none; gap:10px; margin-left:15px;">
+                        <button id="btn-edit-project" class="btn-icon" title="Renomear"><i class="fa-solid fa-pen"></i></button>
+                        <button id="btn-delete-project" class="btn-icon" title="Excluir"><i class="fa-solid fa-trash"></i></button>
+                        <button id="btn-invite" class="btn-secondary">Convidar</button>
+                    </div>
+                </div>
                 <div class="search-box">
                     <i class="fa fa-search"></i>
                     <input type="text" id="search-input" placeholder="Buscar tarefas...">
-                </div>
-                <div class="actions">
-                    <button id="btn-invite" class="btn-secondary">Convidar</button>
-                    <button id="btn-add-task" class="btn-primary">+ Nova Tarefa</button>
                 </div>
             </header>
 
             <div class="kanban-board">
                 <div class="kanban-column">
-                    <h3>A Fazer <span class="count" id="count-todo">0</span></h3>
+                    <div class="col-header">
+                        <h3>A Fazer <span class="count" id="count-todo">0</span></h3>
+                        <button id="btn-add-task" class="btn-plus" title="Nova Tarefa">+</button>
+                    </div>
                     <div class="task-list" id="todo" ondragover="event.preventDefault()" ondrop="drop(event)"></div>
                 </div>
+
                 <div class="kanban-column">
                     <h3>Fazendo <span class="count" id="count-doing">0</span></h3>
                     <div class="task-list" id="doing" ondragover="event.preventDefault()" ondrop="drop(event)"></div>
                 </div>
+
                 <div class="kanban-column">
                     <h3>Feito <span class="count" id="count-done">0</span></h3>
-                    <div class="task-list" id="done" ondragover="event.preventDefault()" ondrop="event.preventDefault(); drop(event)"></div>
+                    <div class="task-list" id="done" ondragover="event.preventDefault()" ondrop="drop(event)"></div>
                     <button id="btn-archive-done" class="btn-archive">Limpar Concluídas</button>
                 </div>
             </div>
+
+            <footer class="main-footer">
+                Developed by Elzimar José de Carvalho Neto. © Copyright 2026, All Rights Reserved.
+            </footer>
         </main>
     </div>
 
     <div id="task-modal" class="modal">
         <div class="modal-content">
             <h2>Nova Tarefa</h2>
-            <input type="text" id="task-title" placeholder="Título">
-            <textarea id="task-desc" placeholder="Descrição"></textarea>
+            <input type="text" id="task-title" placeholder="O que precisa ser feito?">
+            <textarea id="task-desc" placeholder="Descrição opcional..."></textarea>
             <div class="modal-buttons">
                 <button id="cancel-task">Cancelar</button>
-                <button id="save-task" class="btn-primary">Salvar Tarefa</button>
+                <button id="save-task" class="btn-primary">Criar</button>
             </div>
         </div>
     </div>
+
     <script type="module" src="dashboard.js"></script>
 </body>
 </html>

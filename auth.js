@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCOHWpGPcdUEXuPopdZd16qQTDHKd-R994",
@@ -12,17 +13,23 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 const provider = new GoogleAuthProvider();
 
 const btnGoogle = document.getElementById('btn-google');
 if (btnGoogle) {
     btnGoogle.onclick = async () => {
         try {
-            await signInWithPopup(auth, provider);
-        } catch (error) {
-            console.error("Erro Google Auth:", error);
-            alert("Erro ao entrar com Google. Verifique se o domínio 127.0.0.1 ou localhost está autorizado no Firebase.");
-        }
+            const result = await signInWithPopup(auth, provider);
+            const user = result.user;
+            await setDoc(doc(db, "users", user.email), {
+                uid: user.uid,
+                nome: user.displayName,
+                email: user.email,
+                foto: user.photoURL,
+                lastLogin: serverTimestamp()
+            }, { merge: true });
+        } catch (error) { console.error("Erro no login:", error); }
     };
 }
 
