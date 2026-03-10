@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - T4SKS</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="login-wrapper">
+        <div class="login-card">
+            <header>
+                <div class="logo">🚀</div>
+                <h1>Entrar no T4SKS</h1>
+            </header>
+
+            <div class="input-group">
+                <label>E-mail ou nome de usuário</label>
+                <input type="text" placeholder="E-mail ou usuário" disabled>
+            </div>
+
+            <button class="btn-continue" disabled>Continuar</button>
+
+            <div class="divider"><span>ou</span></div>
+
+            <div class="social-login">
+                <button id="btn-google" class="btn-social">
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+                    Continuar com o Google
+                </button>
+            </div>
+
+            <hr>
+            <p class="footer-text">Não tem uma conta? <a href="#">Inscrever-se</a></p>
+        </div>
+    </div>
+    <script type="module" src="auth.js"></script>
+</body>
+</html>
