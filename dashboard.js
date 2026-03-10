@@ -88,7 +88,7 @@ window.drop = async (ev) => {
 };
 
 document.getElementById('btn-archive-done').onclick = async () => {
-    if (confirm("Limpar concluídas?")) {
+    if (confirm("Limpar concluídas permanentemente?")) {
         const q = query(collection(db, "tasks"), where("project", "==", currentProject), where("status", "==", "done"));
         const snapshot = await getDocs(q);
         const batch = writeBatch(db);
@@ -98,8 +98,8 @@ document.getElementById('btn-archive-done').onclick = async () => {
 };
 
 document.getElementById('btn-invite').onclick = async () => {
-    if (currentProject === "Geral") return alert("Geral é privado.");
-    const email = prompt("E-mail do convidado:");
+    if (currentProject === "Geral") return alert("O projeto Geral é privado. Crie um novo projeto para convidar membros.");
+    const email = prompt("E-mail Google do convidado:");
     if (email && email.includes('@')) {
         const q = query(collection(db, "projects"), where("title", "==", currentProject), where("adminId", "==", auth.currentUser.uid));
         const snap = await getDocs(q);
@@ -108,9 +108,9 @@ document.getElementById('btn-invite').onclick = async () => {
             if (!members.includes(email)) {
                 members.push(email);
                 await updateDoc(doc(db, "projects", snap.docs[0].id), { members });
-                alert("Convidado!");
+                alert("Convidado adicionado com sucesso!");
             }
-        }
+        } else { alert("Apenas o criador do projeto pode convidar membros."); }
     }
 };
 

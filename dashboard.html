@@ -15,7 +15,7 @@
             <nav class="projects-nav">
                 <h3>Meus Projetos</h3>
                 <ul id="projects-list">
-                    <li class="active" onclick="selecionarProjeto('Geral')">Geral</li>
+                    <li class="active">Geral</li>
                 </ul>
                 <button id="btn-new-project">+ Novo Projeto</button>
             </nav>
@@ -43,12 +43,10 @@
                     <h3>A Fazer <span class="count" id="count-todo">0</span></h3>
                     <div class="task-list" id="todo" ondragover="event.preventDefault()" ondrop="drop(event)"></div>
                 </div>
-
                 <div class="kanban-column">
                     <h3>Fazendo <span class="count" id="count-doing">0</span></h3>
                     <div class="task-list" id="doing" ondragover="event.preventDefault()" ondrop="drop(event)"></div>
                 </div>
-
                 <div class="kanban-column">
                     <h3>Feito <span class="count" id="count-done">0</span></h3>
                     <div class="task-list" id="done" ondragover="event.preventDefault()" ondrop="drop(event)"></div>
