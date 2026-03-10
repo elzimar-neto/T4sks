@@ -21,7 +21,7 @@
             </nav>
             <div class="user-footer">
                 <img id="user-photo" src="" alt="User">
-                <span id="user-name">Carregando...</span>
+                <span id="user-name">...</span>
                 <button id="btn-logout" title="Sair"><i class="fa-solid fa-right-from-bracket"></i></button>
             </div>
         </aside>
@@ -52,7 +52,7 @@
                 <div class="kanban-column">
                     <h3>Feito <span class="count" id="count-done">0</span></h3>
                     <div class="task-list" id="done" ondragover="event.preventDefault()" ondrop="drop(event)"></div>
-                    <button id="btn-archive-done" class="btn-archive">Arquivar Tudo</button>
+                    <button id="btn-archive-done" class="btn-archive">Limpar Concluídas</button>
                 </div>
             </div>
         </main>
@@ -61,11 +61,11 @@
     <div id="task-modal" class="modal">
         <div class="modal-content">
             <h2>Nova Tarefa</h2>
-            <input type="text" id="task-title" placeholder="Título da tarefa">
-            <textarea id="task-desc" placeholder="Detalhes (opcional)"></textarea>
+            <input type="text" id="task-title" placeholder="O que precisa ser feito?">
+            <textarea id="task-desc" placeholder="Descrição ou detalhes adicionais" rows="4"></textarea>
             <div class="modal-buttons">
                 <button id="cancel-task">Cancelar</button>
-                <button id="save-task" class="btn-primary">Salvar</button>
+                <button id="save-task" class="btn-primary">Salvar Tarefa</button>
             </div>
         </div>
     </div>

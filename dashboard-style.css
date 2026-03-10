@@ -1,56 +1,33 @@
 :root {
-    --bg-dark: #121212;
-    --sidebar-bg: #000000;
-    --card-bg: #1e1e1e;
-    --accent: #1ed760;
-    --text-main: #ffffff;
-    --text-muted: #b3b3b3;
-    --border: #282828;
+    --bg-dark: #121212; --sidebar-bg: #000000; --card-bg: #1e1e1e;
+    --accent: #1ed760; --text-main: #ffffff; --text-muted: #b3b3b3; --border: #282828;
 }
 
 body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: var(--bg-dark); color: var(--text-main); overflow: hidden; }
 .app-container { display: flex; height: 100vh; }
 
-/* Sidebar */
 .sidebar { width: 240px; background-color: var(--sidebar-bg); display: flex; flex-direction: column; padding: 20px; border-right: 1px solid var(--border); }
 .logo-area { font-size: 22px; font-weight: bold; margin-bottom: 30px; color: var(--accent); }
 .projects-nav h3 { font-size: 11px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 15px; }
 .projects-nav ul { list-style: none; padding: 0; margin-bottom: 15px; }
-.projects-nav li { padding: 12px; border-radius: 6px; cursor: pointer; margin-bottom: 4px; font-size: 14px; transition: 0.2s; }
+.projects-nav li { padding: 12px; border-radius: 6px; cursor: pointer; margin-bottom: 4px; font-size: 14px; transition: 0.2s; color: var(--text-muted); }
 .projects-nav li.active { background: #282828; color: var(--accent); font-weight: bold; }
-.projects-nav li:hover:not(.active) { background: #1a1a1a; }
 #btn-new-project { background: transparent; border: 1px dashed var(--border); color: var(--text-muted); width: 100%; padding: 10px; cursor: pointer; border-radius: 6px; }
 
-/* Main Content */
 .main-content { flex: 1; display: flex; flex-direction: column; }
 .top-bar { padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
 .search-box { background: #242424; padding: 10px 18px; border-radius: 25px; display: flex; align-items: center; width: 350px; }
 .search-box input { background: transparent; border: none; color: white; margin-left: 10px; outline: none; width: 100%; }
+
+.kanban-board { display: flex; gap: 20px; padding: 25px; flex: 1; overflow-x: auto; align-items: flex-start; }
+.kanban-column { background: #181818; min-width: 320px; border-radius: 12px; padding: 15px; display: flex; flex-direction: column; max-height: 90%; }
+.task-list { flex: 1; min-height: 150px; margin-top: 10px; }
+.task-card { background: var(--card-bg); padding: 16px; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 12px; cursor: grab; }
+.task-card:active { cursor: grabbing; border-color: var(--accent); }
+
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); align-items: center; justify-content: center; z-index: 1000; }
+.modal-content { background: #282828; padding: 30px; border-radius: 12px; width: 400px; }
 .btn-primary { background: var(--accent); border: none; padding: 10px 22px; border-radius: 25px; font-weight: bold; cursor: pointer; }
 .btn-secondary { background: #333; color: white; border: none; padding: 10px 22px; border-radius: 25px; margin-right: 10px; cursor: pointer; }
-
-/* Kanban Board */
-.kanban-board { display: flex; gap: 20px; padding: 25px; flex: 1; overflow-x: auto; align-items: flex-start; }
-.kanban-column { background: #181818; min-width: 320px; max-width: 320px; border-radius: 12px; padding: 15px; display: flex; flex-direction: column; max-height: 90%; }
-.kanban-column h3 { font-size: 15px; margin-bottom: 20px; display: flex; justify-content: space-between; padding: 0 5px; }
-.count { background: #2a2a2a; padding: 2px 10px; border-radius: 12px; font-size: 12px; color: var(--text-muted); }
-.task-list { flex: 1; overflow-y: auto; min-height: 150px; }
-
-/* Cards */
-.task-card { background: var(--card-bg); padding: 16px; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 12px; cursor: grab; }
-.task-card:active { cursor: grabbing; }
-.task-card h4 { margin: 0 0 6px 0; font-size: 14px; }
-.task-card p { margin: 0; font-size: 12px; color: var(--text-muted); line-height: 1.4; }
-
-/* User Footer */
 .user-footer { margin-top: auto; display: flex; align-items: center; gap: 12px; padding-top: 15px; border-top: 1px solid var(--border); }
-#user-photo { width: 36px; height: 36px; border-radius: 50%; background: #333; }
-#btn-logout { background: transparent; border: none; color: var(--text-muted); cursor: pointer; margin-left: auto; font-size: 18px; }
-
-/* Modal */
-.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); align-items: center; justify-content: center; z-index: 1000; }
-.modal-content { background: #282828; padding: 30px; border-radius: 12px; width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-.modal-content input, .modal-content textarea { width: 100%; margin-bottom: 15px; padding: 12px; background: #121212; border: 1px solid #444; color: white; border-radius: 6px; box-sizing: border-box; }
-.modal-buttons { display: flex; justify-content: flex-end; gap: 10px; }
-#cancel-task { background: transparent; border: none; color: white; cursor: pointer; }
-.btn-archive { margin-top: 15px; background: transparent; border: 1px solid #333; color: var(--text-muted); padding: 8px; border-radius: 6px; cursor: pointer; font-size: 12px; }
+#user-photo { width: 36px; height: 36px; border-radius: 50%; }
