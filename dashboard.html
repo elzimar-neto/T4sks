@@ -10,20 +10,23 @@
 <body class="dark-theme">
     <div class="app-container">
         <aside class="sidebar">
-            <div class="logo-area">🤖 DASHT4SK</div>
-            <nav class="projects-nav">
-                <h3>PROJETOS <button id="btn-new-project" title="Novo Projeto">+</button></h3>
-                <ul id="projects-list"></ul>
-            </nav>
-            <div class="theme-switch">
-                <button id="toggle-theme"><i class="fa-solid fa-moon"></i> Alternar Tema</button>
+            <div class="sidebar-top">
+                <div class="logo-area">🤖 DASHT4SK</div>
+                <nav class="projects-nav">
+                    <h3>PROJETOS <button id="btn-new-project" title="Novo Projeto">+</button></h3>
+                    <ul id="projects-list"></ul>
+                </nav>
             </div>
-            <div class="user-footer">
-                <img id="user-photo" src="" alt="">
-                <div class="u-info">
-                    <span id="user-name">...</span>
+            
+            <div class="sidebar-bottom">
+                <div class="theme-switch">
+                    <button id="toggle-theme"><i class="fa-solid fa-moon"></i> Tema</button>
                 </div>
-                <button id="btn-logout" title="Sair"><i class="fa-solid fa-right-from-bracket"></i></button>
+                <div class="user-footer">
+                    <img id="user-photo" src="" alt="">
+                    <span id="user-name">...</span>
+                    <button id="btn-logout" title="Sair"><i class="fa-solid fa-right-from-bracket"></i></button>
+                </div>
             </div>
         </aside>
 
@@ -32,8 +35,8 @@
                 <div class="project-header">
                     <h2 id="current-project-title">Geral</h2>
                     <div id="project-admin-tools" style="display:none; gap:10px; margin-left:15px;">
-                        <button id="btn-edit-project" class="btn-icon" title="Renomear"><i class="fa-solid fa-pen"></i></button>
-                        <button id="btn-delete-project" class="btn-icon" title="Excluir"><i class="fa-solid fa-trash"></i></button>
+                        <button id="btn-edit-project" class="btn-icon"><i class="fa-solid fa-pen"></i></button>
+                        <button id="btn-delete-project" class="btn-icon"><i class="fa-solid fa-trash"></i></button>
                         <button id="btn-invite" class="btn-secondary">Convidar</button>
                     </div>
                 </div>
@@ -47,23 +50,20 @@
                 <div class="kanban-column">
                     <div class="col-header">
                         <h3>A Fazer <span class="count" id="count-todo">0</span></h3>
-                        <button id="btn-add-task" class="btn-plus" title="Nova Tarefa">+</button>
+                        <button id="btn-add-task" class="btn-plus">+</button>
                     </div>
                     <div class="task-list" id="todo" ondragover="event.preventDefault()" ondrop="drop(event)"></div>
                 </div>
-
                 <div class="kanban-column">
                     <h3>Fazendo <span class="count" id="count-doing">0</span></h3>
                     <div class="task-list" id="doing" ondragover="event.preventDefault()" ondrop="drop(event)"></div>
                 </div>
-
                 <div class="kanban-column">
                     <h3>Feito <span class="count" id="count-done">0</span></h3>
                     <div class="task-list" id="done" ondragover="event.preventDefault()" ondrop="drop(event)"></div>
                     <button id="btn-archive-done" class="btn-archive">Limpar Concluídas</button>
                 </div>
             </div>
-
             <footer class="main-footer">
                 Developed by Elzimar José de Carvalho Neto. © Copyright 2026, All Rights Reserved.
             </footer>
@@ -73,8 +73,26 @@
     <div id="task-modal" class="modal">
         <div class="modal-content">
             <h2>Nova Tarefa</h2>
-            <input type="text" id="task-title" placeholder="O que precisa ser feito?">
-            <textarea id="task-desc" placeholder="Descrição opcional..."></textarea>
+            <input type="text" id="task-title" placeholder="Título da tarefa">
+            <textarea id="task-desc" placeholder="Descrição"></textarea>
+            
+            <div class="modal-row">
+                <div class="input-field">
+                    <label>Data de Entrega</label>
+                    <input type="date" id="task-date">
+                </div>
+                <div class="input-field">
+                    <label>Prioridade</label>
+                    <div class="star-rating" id="star-input">
+                        <i class="fa-star fa-regular" data-value="1"></i>
+                        <i class="fa-star fa-regular" data-value="2"></i>
+                        <i class="fa-star fa-regular" data-value="3"></i>
+                        <i class="fa-star fa-regular" data-value="4"></i>
+                        <i class="fa-star fa-regular" data-value="5"></i>
+                    </div>
+                </div>
+            </div>
+
             <div class="modal-buttons">
                 <button id="cancel-task">Cancelar</button>
                 <button id="save-task" class="btn-primary">Criar</button>
