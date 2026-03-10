@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - T4SKS</title>
+    <link rel="stylesheet" href="dashboard-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area">🚀 T4SKS</div>
+            <nav class="projects-nav">
+                <h3>Meus Projetos</h3>
+                <ul id="projects-list">
+                    <li class="active">Geral</li>
+                </ul>
+                <button id="btn-new-project">+ Novo Projeto</button>
+            </nav>
+            <div class="user-footer">
+                <img id="user-photo" src="" alt="">
+                <span id="user-name">Carregando...</span>
+                <button id="btn-logout"><i class="fa-solid fa-right-from-bracket"></i></button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="search-box">
+                    <i class="fa fa-search"></i>
+                    <input type="text" id="search-input" placeholder="Buscar tarefas...">
+                </div>
+                <div class="actions">
+                    <button id="btn-invite" class="btn-secondary">Convidar Membros</button>
+                    <button id="btn-add-task" class="btn-primary">+ Nova Tarefa</button>
+                </div>
+            </header>
+
+            <div class="kanban-board">
+                <div class="kanban-column" id="todo-column">
+                    <h3>A Fazer <span class="count">0</span></h3>
+                    <div class="task-list" id="todo-list"></div>
+                </div>
+
+                <div class="kanban-column" id="doing-column">
+                    <h3>Fazendo <span class="count">0</span></h3>
+                    <div class="task-list" id="doing-list"></div>
+                </div>
+
+                <div class="kanban-column" id="done-column">
+                    <h3>Feito <span class="count">0</span></h3>
+                    <div class="task-list" id="done-list"></div>
+                    <button id="btn-archive-done">Arquivar Concluídas</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="task-modal" class="modal">
+        <div class="modal-content">
+            <h2>Nova Tarefa</h2>
+            <input type="text" id="task-title" placeholder="O que precisa ser feito?">
+            <textarea id="task-desc" placeholder="Descrição (opcional)"></textarea>
+            <div class="modal-buttons">
+                <button id="cancel-task">Cancelar</button>
+                <button id="save-task" class="btn-primary">Criar Tarefa</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="dashboard.js"></script>
+</body>
+</html>
