@@ -1,29 +1,360 @@
+/* Variáveis de Cores Estilo Dark Modern */
 :root {
-    --bg-dark: #121212; --sidebar-bg: #000000; --card-bg: #1e1e1e;
-    --accent: #1ed760; --text-main: #ffffff; --text-muted: #b3b3b3; --border: #282828;
+    --bg-dark: #121212;
+    --sidebar-bg: #000000;
+    --card-bg: #1e1e1e;
+    --accent: #1ed760; /* Verde estilo Spotify */
+    --text-main: #ffffff;
+    --text-muted: #b3b3b3;
+    --border: #282828;
+    --hover-bg: #2a2a2a;
+    --modal-overlay: rgba(0, 0, 0, 0.85);
 }
-body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: var(--bg-dark); color: var(--text-main); overflow: hidden; }
-.app-container { display: flex; height: 100vh; }
-.sidebar { width: 240px; background-color: var(--sidebar-bg); display: flex; flex-direction: column; padding: 20px; border-right: 1px solid var(--border); }
-.logo-area { font-size: 22px; font-weight: bold; margin-bottom: 30px; color: var(--accent); }
-.projects-nav h3 { font-size: 11px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 15px; }
-.projects-nav ul { list-style: none; padding: 0; margin-bottom: 15px; }
-.projects-nav li { padding: 12px; border-radius: 6px; cursor: pointer; margin-bottom: 4px; font-size: 14px; color: var(--text-muted); }
-.projects-nav li.active { background: #282828; color: var(--accent); font-weight: bold; }
-#btn-new-project { background: transparent; border: 1px dashed var(--border); color: var(--text-muted); width: 100%; padding: 10px; cursor: pointer; border-radius: 6px; }
-.main-content { flex: 1; display: flex; flex-direction: column; }
-.top-bar { padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
-.search-box { background: #242424; padding: 10px 18px; border-radius: 25px; display: flex; align-items: center; width: 300px; }
-.search-box input { background: transparent; border: none; color: white; margin-left: 10px; outline: none; width: 100%; }
-.kanban-board { display: flex; gap: 20px; padding: 25px; flex: 1; overflow-x: auto; }
-.kanban-column { background: #181818; min-width: 300px; border-radius: 12px; padding: 15px; display: flex; flex-direction: column; }
-.task-list { flex: 1; min-height: 200px; margin-top: 10px; }
-.task-card { background: var(--card-bg); padding: 15px; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 10px; cursor: grab; }
-.btn-primary { background: var(--accent); border: none; padding: 10px 20px; border-radius: 25px; font-weight: bold; cursor: pointer; }
-.btn-secondary { background: #333; color: white; border: none; padding: 10px 20px; border-radius: 25px; cursor: pointer; }
-.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; z-index: 1000; }
-.modal-content { background: #282828; padding: 30px; border-radius: 12px; width: 350px; }
-.user-footer { margin-top: auto; display: flex; align-items: center; gap: 10px; padding-top: 15px; border-top: 1px solid var(--border); }
-#user-photo { width: 32px; height: 32px; border-radius: 50%; background: #333; }
-#btn-logout { background: transparent; border: none; color: var(--text-muted); cursor: pointer; margin-left: auto; }
-.btn-archive { margin-top: 10px; background: transparent; border: 1px solid #333; color: var(--text-muted); padding: 8px; border-radius: 6px; cursor: pointer; }
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    overflow: hidden; /* Evita scroll na página toda, foca no Kanban */
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Barra Lateral (Sidebar) */
+.sidebar {
+    width: 240px;
+    background-color: var(--sidebar-bg);
+    display: flex;
+    flex-direction: column;
+    padding: 24px 16px;
+    border-right: 1px solid var(--border);
+}
+
+.logo-area {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 32px;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.projects-nav h3 {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    padding-left: 8px;
+}
+
+.projects-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px 0;
+}
+
+.projects-nav li {
+    padding: 12px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 4px;
+    font-size: 14px;
+    color: var(--text-muted);
+    transition: all 0.2s ease;
+}
+
+.projects-nav li:hover {
+    color: var(--text-main);
+    background-color: #1a1a1a;
+}
+
+.projects-nav li.active {
+    background-color: var(--hover-bg);
+    color: var(--accent);
+    font-weight: bold;
+}
+
+#btn-new-project {
+    background: transparent;
+    border: 1px dashed var(--border);
+    color: var(--text-muted);
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+#btn-new-project:hover {
+    border-color: var(--text-muted);
+    color: var(--text-main);
+}
+
+/* Área Principal (Main) */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.top-bar {
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    background-color: var(--bg-dark);
+}
+
+.search-box {
+    background: #242424;
+    padding: 10px 18px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    width: 350px;
+}
+
+.search-box i {
+    color: var(--text-muted);
+}
+
+.search-box input {
+    background: transparent;
+    border: none;
+    color: white;
+    margin-left: 10px;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+}
+
+.actions {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-primary {
+    background-color: var(--accent);
+    border: none;
+    padding: 10px 22px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    color: black;
+    transition: transform 0.2s;
+}
+
+.btn-secondary {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-primary:hover, .btn-secondary:hover {
+    transform: scale(1.03);
+}
+
+/* Quadro Kanban */
+.kanban-board {
+    display: flex;
+    gap: 20px;
+    padding: 24px;
+    flex: 1;
+    overflow-x: auto;
+    align-items: flex-start;
+}
+
+.kanban-column {
+    background-color: #181818;
+    min-width: 320px;
+    max-width: 320px;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+}
+
+.kanban-column h3 {
+    font-size: 15px;
+    margin: 0 0 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.count {
+    background: #2a2a2a;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.task-list {
+    flex: 1;
+    min-height: 150px;
+    overflow-y: auto;
+}
+
+/* Estilização dos Cards */
+.task-card {
+    background-color: var(--card-bg);
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    margin-bottom: 12px;
+    cursor: grab;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: border-color 0.2s;
+}
+
+.task-card:active {
+    cursor: grabbing;
+}
+
+.task-card:hover {
+    border-color: #444;
+}
+
+.task-card h4 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.task-card p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+/* Rodapé do Usuário */
+.user-footer {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+}
+
+#user-photo {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #333;
+}
+
+#user-name {
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+}
+
+#btn-logout {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 18px;
+    padding: 8px;
+}
+
+#btn-logout:hover {
+    color: #ff4d4d;
+}
+
+/* Modal Estilizado */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: var(--modal-overlay);
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background: #282828;
+    padding: 32px;
+    border-radius: 12px;
+    width: 400px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.modal-content h2 {
+    margin: 0 0 24px 0;
+    font-size: 20px;
+}
+
+.modal-content input, .modal-content textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 16px;
+    background: #121212;
+    border: 1px solid #3e3e3e;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    outline: none;
+}
+
+.modal-content input:focus {
+    border-color: var(--accent);
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+}
+
+#cancel-task {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-archive {
+    margin-top: 16px;
+    background-color: transparent;
+    border: 1px solid #333;
+    color: var(--text-muted);
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    width: 100%;
+}
+
+.btn-archive:hover {
+    border-color: #555;
+    color: var(--text-main);
+}

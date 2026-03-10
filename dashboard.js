@@ -19,9 +19,8 @@ let currentProject = "Geral";
 let unsubscribeTasks = null;
 
 onAuthStateChanged(auth, (user) => {
-    if (!user) {
-        window.location.href = "index.html";
-    } else {
+    if (!user) { window.location.href = "index.html"; } 
+    else {
         document.getElementById('user-name').innerText = user.displayName || user.email.split('@')[0];
         document.getElementById('user-photo').src = user.photoURL || `https://ui-avatars.com/api/?name=${user.email}`;
         carregarProjetos();
@@ -81,14 +80,13 @@ document.getElementById('save-task').onclick = async () => {
 
 window.drag = (ev) => ev.dataTransfer.setData("taskId", ev.target.id);
 window.drop = async (ev) => {
-    ev.preventDefault();
     const id = ev.dataTransfer.getData("taskId");
     const newStatus = ev.currentTarget.id;
     if (id && newStatus) await updateDoc(doc(db, "tasks", id), { status: newStatus });
 };
 
 document.getElementById('btn-archive-done').onclick = async () => {
-    if (confirm("Limpar concluídas permanentemente?")) {
+    if (confirm("Limpar tarefas concluídas?")) {
         const q = query(collection(db, "tasks"), where("project", "==", currentProject), where("status", "==", "done"));
         const snapshot = await getDocs(q);
         const batch = writeBatch(db);
@@ -97,8 +95,13 @@ document.getElementById('btn-archive-done').onclick = async () => {
     }
 };
 
+document.getElementById('btn-new-project').onclick = async () => {
+    const nome = prompt("Nome do projeto:");
+    if (nome) await addDoc(collection(db, "projects"), { title: nome, adminId: auth.currentUser.uid, members: [auth.currentUser.email], createdAt: serverTimestamp() });
+};
+
 document.getElementById('btn-invite').onclick = async () => {
-    if (currentProject === "Geral") return alert("O projeto Geral é privado. Crie um novo projeto para convidar membros.");
+    if (currentProject === "Geral") return alert("Geral é privado.");
     const email = prompt("E-mail Google do convidado:");
     if (email && email.includes('@')) {
         const q = query(collection(db, "projects"), where("title", "==", currentProject), where("adminId", "==", auth.currentUser.uid));
@@ -108,15 +111,10 @@ document.getElementById('btn-invite').onclick = async () => {
             if (!members.includes(email)) {
                 members.push(email);
                 await updateDoc(doc(db, "projects", snap.docs[0].id), { members });
-                alert("Convidado adicionado com sucesso!");
+                alert("Convidado!");
             }
-        } else { alert("Apenas o criador do projeto pode convidar membros."); }
+        }
     }
-};
-
-document.getElementById('btn-new-project').onclick = async () => {
-    const nome = prompt("Nome do projeto:");
-    if (nome) await addDoc(collection(db, "projects"), { title: nome, adminId: auth.currentUser.uid, members: [auth.currentUser.email], createdAt: serverTimestamp() });
 };
 
 document.getElementById('search-input').oninput = (e) => {

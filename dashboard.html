@@ -8,15 +8,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-
     <div class="app-container">
         <aside class="sidebar">
             <div class="logo-area">🚀 T4SKS</div>
             <nav class="projects-nav">
                 <h3>Meus Projetos</h3>
-                <ul id="projects-list">
-                    <li class="active">Geral</li>
-                </ul>
+                <ul id="projects-list"><li class="active">Geral</li></ul>
                 <button id="btn-new-project">+ Novo Projeto</button>
             </nav>
             <div class="user-footer">
@@ -49,7 +46,7 @@
                 </div>
                 <div class="kanban-column">
                     <h3>Feito <span class="count" id="count-done">0</span></h3>
-                    <div class="task-list" id="done" ondragover="event.preventDefault()" ondrop="drop(event)"></div>
+                    <div class="task-list" id="done" ondragover="event.preventDefault()" ondrop="event.preventDefault(); drop(event)"></div>
                     <button id="btn-archive-done" class="btn-archive">Limpar Concluídas</button>
                 </div>
             </div>
@@ -67,7 +64,6 @@
             </div>
         </div>
     </div>
-
     <script type="module" src="dashboard.js"></script>
 </body>
 </html>
