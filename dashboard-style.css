@@ -1,39 +1,46 @@
-:root { --bg: #121212; --card: #1e1e1e; --accent: #1ed760; --text: #fff; --sidebar: #000; --border: #282828; }
-.light-theme { --bg: #f8f9fa; --card: #ffffff; --accent: #27ae60; --text: #2c3e50; --sidebar: #ffffff; --border: #dee2e6; }
-
-/* CENTRALIZAÇÃO LOGIN */
-.auth-page { 
-    display: flex; align-items: center; justify-content: center; 
-    height: 100vh; width: 100vw; background: var(--bg); margin: 0;
+:root {
+    --bg: #0f0f0f; --card: #1a1a1a; --accent: #1ed760; --text: #ffffff; --sidebar: #000; --border: #333; --card-hover: #252525;
 }
-.login-card { 
-    background: var(--card); padding: 50px; border-radius: 20px; 
-    text-align: center; width: 380px; border: 1px solid var(--border);
+.light-theme {
+    --bg: #f0f2f5; --card: #ffffff; --accent: #16a34a; --text: #1f2937; --sidebar: #ffffff; --border: #d1d5db; --card-hover: #f9fafb;
 }
-.logo { font-size: 60px; margin-bottom: 20px; }
-.btn-social { width: 100%; padding: 14px; border-radius: 25px; border: 1px solid var(--border); background: transparent; color: var(--text); font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
-/* DASHBOARD */
-.app-container { display: flex; height: 100vh; width: 100vw; }
-.sidebar { 
-    width: 260px; background: var(--sidebar); display: flex; flex-direction: column; 
-    padding: 25px; border-right: 1px solid var(--border); justify-content: space-between; 
-}
-.sidebar-bottom { border-top: 1px solid var(--border); padding-top: 20px; }
-#toggle-theme { width: 100%; padding: 10px; border-radius: 10px; background: var(--border); color: var(--text); border: none; cursor: pointer; margin-bottom: 15px; }
+* { box-sizing: border-box; transition: background 0.2s, color 0.2s; }
+body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
 
-/* MODAL TAREFA */
-.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; z-index: 999; }
-.modal-content { background: var(--card); padding: 30px; border-radius: 15px; width: 450px; border: 1px solid var(--border); }
-.modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 15px 0; }
-.field label { display: block; font-size: 11px; opacity: 0.6; margin-bottom: 5px; }
-.star-rating { color: var(--accent); cursor: pointer; font-size: 18px; }
+/* LOGIN CENTRALIZADO */
+.auth-page { display: flex; align-items: center; justify-content: center; height: 100vh; background: var(--bg); }
+.login-card { background: var(--card); padding: 40px; border-radius: 20px; text-align: center; width: 350px; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+.logo { font-size: 50px; margin-bottom: 10px; }
 
-/* CARDS E KANBAN */
-.kanban-board { display: flex; gap: 20px; padding: 25px; flex: 1; overflow-x: auto; }
-.kanban-column { background: var(--card); min-width: 320px; border-radius: 12px; padding: 15px; border: 1px solid var(--border); }
-.task-card { background: var(--bg); padding: 15px; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 10px; cursor: grab; }
-.dragging { opacity: 0.5; border: 2px dashed var(--accent); }
+/* SIDEBAR E RODAPÉ */
+.app-container { display: flex; height: 100vh; }
+.sidebar { width: 260px; background: var(--sidebar); display: flex; flex-direction: column; padding: 20px; border-right: 1px solid var(--border); }
+.sidebar-bottom { margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border); }
+.user-footer { display: flex; align-items: center; gap: 10px; margin-top: 15px; }
+#user-photo { width: 35px; height: 35px; border-radius: 50%; border: 2px solid var(--accent); }
+
+/* KANBAN */
+.main-content { flex: 1; display: flex; flex-direction: column; }
+.top-bar { padding: 20px; display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); }
+.kanban-board { display: flex; gap: 20px; padding: 20px; flex: 1; overflow-x: auto; }
+.kanban-column { background: var(--card); min-width: 300px; border-radius: 12px; padding: 15px; border: 1px solid var(--border); display: flex; flex-direction: column; }
+.col-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+
+/* CARDS E ARRASTAR */
+.task-list { flex: 1; min-height: 100px; }
+.task-card { background: var(--bg); padding: 15px; border-radius: 10px; border: 1px solid var(--border); margin-bottom: 10px; cursor: grab; }
+.task-card:hover { border-color: var(--accent); background: var(--card-hover); }
+.task-card.dragging { opacity: 0.4; border: 2px dashed var(--accent); }
+
+/* ESTRELAS E DATA */
+.star-rating { color: var(--accent); display: flex; gap: 4px; cursor: pointer; }
 .card-stars { color: var(--accent); font-size: 10px; margin-bottom: 5px; }
-.date-tag { font-size: 10px; opacity: 0.7; display: block; margin-top: 10px; }
-.main-footer { text-align: center; padding: 10px; font-size: 10px; opacity: 0.4; }
+.date-tag { font-size: 10px; opacity: 0.6; display: block; margin-top: 8px; }
+
+/* MODAL CONFIGURADO */
+.modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; z-index: 1000; }
+.modal-content { background: var(--card); padding: 30px; border-radius: 15px; width: 400px; border: 1px solid var(--border); }
+.modal-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 15px 0; }
+input, textarea { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text); outline: none; }
+.btn-primary { background: var(--accent); color: #000; border: none; padding: 10px; border-radius: 20px; font-weight: bold; cursor: pointer; width: 100%; }
